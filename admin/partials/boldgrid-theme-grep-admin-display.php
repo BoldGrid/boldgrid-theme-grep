@@ -60,7 +60,7 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 							<div id="bgthgr-notice-' . $notice_count . '" class="notice notice-error inline">' .
 								$markup_header .
 								$markup_rule . '
-								<p>Currently, there is no grep for this rule. If you would like to recommend one, please do so on this plugin\'s GitHub page. Thanks!</p>
+								<p>Currently, there is no grep for this rule. If you would like to recommend one, please do so on <a href="https://github.com/BoldGrid/boldgrid-theme-grep" target="_blank">this plugin\'s GitHub page</a>. Thanks!</p>
 							</div>
 						</div>
 					</div>';
