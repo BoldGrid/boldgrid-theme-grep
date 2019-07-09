@@ -13,9 +13,6 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
  * @package    Boldgrid_Theme_Grep
  * @subpackage Boldgrid_Theme_Grep/admin
  * @author     BoldGrid <support@boldgrid.com>
@@ -48,14 +45,14 @@ class Boldgrid_Theme_Grep_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
+	 * Configure our admin menus.
 	 *
+	 * @since 1.0.0
 	 */
 	public function admin_menu() {
 		add_management_page(
@@ -68,7 +65,11 @@ class Boldgrid_Theme_Grep_Admin {
 	}
 
 	/**
+	 * Get configs.
 	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_configs() {
 		$configs = include BOLDGRID_THEME_GREP_PATH . '/includes/config/config.plugin.php';
@@ -82,22 +83,9 @@ class Boldgrid_Theme_Grep_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles( $hook ) {
-
 		if ( 'tools_page_boldgrid-theme-grep' !== $hook ) {
 			return;
 		}
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Boldgrid_Theme_Grep_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Boldgrid_Theme_Grep_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/boldgrid-theme-grep-admin.css', array(), $this->version, 'all' );
 
@@ -109,52 +97,21 @@ class Boldgrid_Theme_Grep_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts( $hook ) {
-
 		if ( 'tools_page_boldgrid-theme-grep' !== $hook ) {
 			return;
 		}
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Boldgrid_Theme_Grep_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Boldgrid_Theme_Grep_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/boldgrid-theme-grep-admin.js', array( 'jquery', 'bgthgr-sticky' ), $this->version, false );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/boldgrid-theme-grep-admin.js', array( 'jquery', 'bgthgr-jquery-jsticky' ), $this->version, false );
-
-		wp_enqueue_script( 'bgthgr-jquery-jsticky', plugin_dir_url( __FILE__ ) . 'js/jquery.jsticky.min.js', array( 'jquery' ), $this->version, false );
-
-		// https://wpreset.com/add-codemirror-editor-plugin-theme/
-		$cm_settings['codeEditor'] = wp_enqueue_code_editor(
-			array(
-				'type' => 'text/css',
-				/*
-				 * CodeMirrorr settings.
-				 *
-				 * @link https://codemirror.net/doc/manual.html
-				 */
-				'codemirror'          => array(
-					'lineNumbers'     => false,
-					'readOnly'        => true,
-					'lint'            => false,
-					'styleActiveLine' => false,
-				),
-			)
-		);
-		wp_localize_script('jquery', 'cm_settings', $cm_settings);
-		// wp_enqueue_script('wp-theme-plugin-editor');
-		wp_enqueue_style('wp-codemirror');
-
+		// @todo - Include this file with a build process.
+		// @link https://github.com/garand/sticky
+		wp_enqueue_script( 'bgthgr-sticky', plugin_dir_url( __FILE__ ) . 'js/jquery.sticky.js', array( 'jquery' ), $this->version, false );
 	}
 
 	/**
+	 * Render the Theme Grep page (Dashboard > Tools > Theme Grep).
 	 *
+	 * @since 1.0.0
 	 */
 	public function page_theme_grep() {
 		require_once( BOLDGRID_THEME_GREP_PATH . '/admin/partials/boldgrid-theme-grep-admin-display.php' );
