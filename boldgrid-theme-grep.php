@@ -13,7 +13,6 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Theme Grep by BoldGrid
- * Plugin URI:        https://www.boldgrid.com
  * Description:       Theme Grep helps to review WordPress themes by automating many searches (greps) used to "snoop around" the theme's code.
  * Version:           1.0.0
  * Author:            BoldGrid
