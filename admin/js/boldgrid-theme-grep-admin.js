@@ -77,6 +77,9 @@
 	 */
 	function bgthgrBindNotices() {
 
+		// Remove all notices that are not bgthgr notices. Otherwise, they will mess up the js.
+		$( '.notice:not([id^="bgthgr-notice-"])' ).remove();
+
 
 
 
