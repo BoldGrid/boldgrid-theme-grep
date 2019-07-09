@@ -88,6 +88,12 @@ h3 a .dashicons,
 	margin-bottom: 7px;
 }
 
+.bgthgr-cmd-container .bgthgr-cmd-heading {
+	background: #ddd;
+	padding: 5px;
+	margin: 0;
+}
+
 .bgthgr-section-container {
 	margin-top: 50px;
 }
@@ -101,4 +107,15 @@ h3 a .dashicons,
     color: #fff;
     border-radius: 16px;
     padding: 0 9px 2px 9px;
+}
+
+.bgthgr-item-heading {
+	font-size: .85em;
+	margin-top: 0;
+}
+
+.bgthgr-section-container .bgthgr-rule-container {
+	font-size: 1.2em;
+	color: #000;
+	margin: 15px 0;
 }
