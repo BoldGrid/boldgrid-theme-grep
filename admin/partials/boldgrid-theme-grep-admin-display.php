@@ -30,6 +30,11 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 	</p>
 
 	<?php
+	// If shell_exec doesn't seem to be working, abort.
+	if ( null === shell_exec( 'pwd' ) ) { // phpcs:ignore
+		die( '<div id="bgthgr-notice-1" class="notice notice-error inline"><p>The php function <code>shell_exec</code> is not available. This plugin cannot run.</p></div>' );
+	}
+
 	$page_count    = 1;
 	$section_count = 1;
 	$notice_count  = 1;
