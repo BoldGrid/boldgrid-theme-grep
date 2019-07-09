@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -77,8 +76,6 @@ class Boldgrid_Theme_Grep {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -87,7 +84,7 @@ class Boldgrid_Theme_Grep {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Boldgrid_Theme_Grep_Loader. Orchestrates the hooks of the plugin.
-	 * - Boldgrid_Theme_Grep_i18n. Defines internationalization functionality.
+	 * - Boldgrid_Theme_Grep_I18n. Defines internationalization functionality.
 	 * - Boldgrid_Theme_Grep_Admin. Defines all hooks for the admin area.
 	 * - Boldgrid_Theme_Grep_Public. Defines all hooks for the public side of the site.
 	 *
@@ -116,12 +113,6 @@ class Boldgrid_Theme_Grep {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-boldgrid-theme-grep-admin.php';
 
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-boldgrid-theme-grep-public.php';
-
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-boldgrid-theme-grep-admin-grep.php';
 
 		$this->loader = new Boldgrid_Theme_Grep_Loader();
@@ -131,7 +122,7 @@ class Boldgrid_Theme_Grep {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Boldgrid_Theme_Grep_i18n class in order to set the domain and to register the hook
+	 * Uses the Boldgrid_Theme_Grep_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -139,7 +130,7 @@ class Boldgrid_Theme_Grep {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Boldgrid_Theme_Grep_i18n();
+		$plugin_i18n = new Boldgrid_Theme_Grep_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -161,22 +152,6 @@ class Boldgrid_Theme_Grep {
 
 		// Setup menu items.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'admin_menu' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Boldgrid_Theme_Grep_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 

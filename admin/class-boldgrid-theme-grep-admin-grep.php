@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -55,7 +54,7 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 
 		$cmd = str_replace( '<THEME>', $this->get_template_directory(), $cmd );
 
-		$output = trim( shell_exec( $cmd ) );
+		$output = trim( shell_exec( $cmd ) ); //phpcs:ignore
 		$output = explode( "\n", $output );
 
 		foreach ( $output as $line ) {
@@ -101,9 +100,9 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 			// Create URL to the file editor for this file.
 			$edit_file_url = admin_url(
 				'theme-editor.php?file=' .
-				urlencode( str_replace( $this->get_template_directory() . '/', '', $file ) ) .
+				rawurlencode( str_replace( $this->get_template_directory() . '/', '', $file ) ) .
 				'&theme=' .
-				urlencode( get_stylesheet() )
+				rawurlencode( get_stylesheet() )
 			);
 
 			// Limit lines to $line_max in length. Useful when we don't want to show an entire minified file.
@@ -124,7 +123,7 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 					esc_html( str_replace( $this->get_template_directory(), '', $file ) ) .
 					' <a href="' . esc_url( $edit_file_url ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a>' .
 				'</div>
-				<div class="bgthgr-code">' . $lines . '</div>
+				<div class="bgthgr-code">' . wp_kses( $lines, [ 'span' => [ 'class' => [] ] ] ) . '</div>
 			</div>';
 		}
 

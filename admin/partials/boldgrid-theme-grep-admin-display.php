@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a admin area view for the plugin
  *
@@ -37,7 +36,7 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 
 	foreach ( $configs['pages'] as $page ) {
 		// Page heading.
-		echo '<h2 class="page" id="bgthgr-page-' . $page_count . '">' . esc_html( $page['title'] ) . ' <a href="' . esc_url( $page['url'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></h2>';
+		echo '<h2 class="page" id="bgthgr-page-' . esc_attr( $page_count ) . '">' . esc_html( $page['title'] ) . ' <a href="' . esc_url( $page['url'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></h2>';
 
 		foreach ( $page['sections'] as $section ) {
 			foreach ( $section['items'] as $item ) {
@@ -66,10 +65,10 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 				if ( empty( $item['greps'] ) ) {
 					echo '<div class="bgthgr-section-container">
 						<div class="bgthgr-item-container">
-							<div id="bgthgr-notice-' . $notice_count . '" class="notice notice-error inline">' .
-								$markup_header .
-								$markup_rule . '
-								<p>Currently, there is no grep for this rule. If you would like to recommend one, please do so on <a href="https://github.com/BoldGrid/boldgrid-theme-grep" target="_blank">this plugin\'s GitHub page</a>. Thanks!</p>
+							<div id="bgthgr-notice-' . esc_attr( $notice_count ) . '" class="notice notice-error inline">' .
+								$markup_header . // phpcs:ignore
+								$markup_rule . // phpcs:ignore
+								'<p>Currently, there is no grep for this rule. If you would like to recommend one, please do so on <a href="https://github.com/BoldGrid/boldgrid-theme-grep" target="_blank">this plugin\'s GitHub page</a>. Thanks!</p>
 							</div>
 						</div>
 					</div>';
@@ -82,18 +81,18 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 
 						$markup_cmd = '<div class="bgthgr-cmd-container">
 							<p class="bgthgr-cmd-heading">
-								<strong>Shell command executed</strong> ( ' . $grep_count . ' of ' . count( $item['greps'] ) . ' ):
+								<strong>Shell command executed</strong> ( ' . esc_html( $grep_count ) . ' of ' . count( $item['greps'] ) . ' ):
 							</p>
 							<div class="bgthgr-code">' . esc_html( $cmd ) . '</div>
 						</div>';
 
 						echo '<div class="bgthgr-section-container">
 							<div class="bgthgr-item-container">
-								<div id="bgthgr-notice-' . $notice_count . '" class="notice notice-warning inline">' .
-									$markup_header .
-									$markup_rule .
-									$markup_cmd . '
-								</div>';
+								<div id="bgthgr-notice-' . esc_attr( $notice_count ) . '" class="notice notice-warning inline">' .
+									$markup_header . // phpcs:ignore
+									$markup_rule . // phpcs:ignore
+									$markup_cmd . // phpcs:ignore
+								'</div>';
 						$grep->grep_and_print( $cmd, $highlights );
 						echo '</div>
 						</div>';

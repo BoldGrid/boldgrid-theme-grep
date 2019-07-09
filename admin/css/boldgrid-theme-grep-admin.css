@@ -62,12 +62,10 @@ h2 a .dashicons,
 	margin: 0;
 }
 
-.bgthgr-section-container {
+.bgthgr-section-container,
+.bgthgr-item-container,
+h2 {
 	margin-top: 50px;
-}
-
-.bgthgr-item-container {
-	margin: 50px 0;
 }
 
 .bgthgr-pill {

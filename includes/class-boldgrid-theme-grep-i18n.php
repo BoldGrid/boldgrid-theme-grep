@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage Boldgrid_Theme_Grep/includes
  * @author     BoldGrid <support@boldgrid.com>
  */
-class Boldgrid_Theme_Grep_i18n {
+class Boldgrid_Theme_Grep_I18n {
 
 
 	/**

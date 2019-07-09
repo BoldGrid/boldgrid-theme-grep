@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -81,6 +80,8 @@ class Boldgrid_Theme_Grep_Admin {
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param string $hook Hook.
 	 */
 	public function enqueue_styles( $hook ) {
 		if ( 'tools_page_boldgrid-theme-grep' !== $hook ) {
@@ -88,13 +89,14 @@ class Boldgrid_Theme_Grep_Admin {
 		}
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/boldgrid-theme-grep-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param string $hook Hook.
 	 */
 	public function enqueue_scripts( $hook ) {
 		if ( 'tools_page_boldgrid-theme-grep' !== $hook ) {
