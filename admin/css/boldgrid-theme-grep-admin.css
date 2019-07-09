@@ -1,23 +1,4 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
-
-.tools_page_boldgrid-theme-grep .CodeMirror {
-    height: fit-content;
-    margin-bottom:15px;
-    border: 1px solid #bbb;
-    border-top:0;
-}
-
-.tools_page_boldgrid-theme-grep .CodeMirror-lines {
-	border-top:1px solid #ddd;
-}
-
-.CodeMirror-gutters {
-	display: none;
-}
-
+/* The grep results header, containing the filename / etc. */
 .bgthgr-heading {
 	background: #ddd;
     font-family: monospace;
@@ -25,12 +6,7 @@
     padding: 10px 5px;
 }
 
-.bgthgr-grep .bgthgr-heading,
-.bgthgr-grep .CodeMirror-gutters {
-	background: #23282d;
-    color: #eee;
-}
-
+/* The toggle arrows. */
 .bgthgr-heading .dashicons-arrow-down-alt2,
 .bgthgr-heading .dashicons-arrow-up-alt2 {
 	cursor: pointer;
@@ -41,13 +17,8 @@
 	padding-bottom: 5px;
 }
 
-.tools_page_boldgrid-theme-grep h3 {
-	margin-top: 25px;
-	margin-bottom: 10px;
-}
-
+/* Dashicons used in headings. */
 h2 a .dashicons,
-h3 a .dashicons,
 .bgthgr-heading a .dashicons {
 	text-decoration: none;
 }
@@ -57,11 +28,7 @@ h3 a .dashicons,
 	margin: 15px 0;
 }
 
-.bgthgr-file-container .CodeMirror {
-	margin-bottom: 0;
-	border: 0;
-}
-
+/* The div containing the code. */
 .bgthgr-code {
 	background: #fff;
     font-family: monospace;
@@ -75,6 +42,7 @@ h3 a .dashicons,
     font-weight: bold;
 }
 
+/* A notice when stuck atop the page. */
 .bgthgr-sticky-notice .notice {
 	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 	left: 161px;
