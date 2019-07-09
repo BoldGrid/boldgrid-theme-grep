@@ -1,6 +1,5 @@
 === Plugin Name ===
 Contributors: boldgrid, imh_brad
-Donate link: https://www.boldgrid.com
 Tags: check, checker, coding standards, theme, tool
 Requires at least: 3.0.1
 Tested up to: 5.2
@@ -21,5 +20,8 @@ Theme Grep is a plugin designed to help review WordPress themes. While Theme Che
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
+
+Release date: July 9th, 2019
+
 * Initial release.
