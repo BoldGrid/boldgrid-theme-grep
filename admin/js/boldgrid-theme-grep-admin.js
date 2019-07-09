@@ -1,46 +1,11 @@
 (function( $ ) {
 	'use strict';
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
-
-	$(document).ready(function($) {
-//		$('.bgthgr-code').each( function() {
-//			var $textarea = $( this );
-//
-//			wp.codeEditor.initialize( $textarea, cm_settings);
-//		});
-
+	$( document ).ready( function($) {
+		// Allow minimizing of a file.
 		$( '.bgthgr-heading .dashicons-arrow-down-alt2' ).on( 'click', function(){
 			var $arrow = $( this ),
 				$code = $arrow.closest( '.bgthgr-file-container' ).find( '.bgthgr-code' );
-
-			// bgthgrBindNotices();
 
 			if ( $arrow.hasClass( 'dashicons-arrow-down-alt2' ) ) {
 				$arrow
@@ -57,45 +22,28 @@
 			}
 		});
 
-//		$( '.notice' ).sticky({
-//			topSpacing: 33,
-//			zIndex: 3,
-//			// stopper: '.bgthgr-item-container'
-//		});
-
 		bgthgrBindNotices();
-
-
-
-		//echo '<div class="bgthgr-heading">' .
-		//'<span class="dashicons dashicons-arrow-down-alt2"></span> ' .
-	  //wp.codeEditor.initialize($('.bgthgr-code'), cm_settings);
-	} )
+	});
 
 	/**
+	 * Bind Notices.
 	 *
+	 * Make notices sticky.
+	 *
+	 * @since 1.0.0
 	 */
 	function bgthgrBindNotices() {
-
 		// Remove all notices that are not bgthgr notices. Otherwise, they will mess up the js.
 		$( '.notice:not([id^="bgthgr-notice-"])' ).remove();
 
-
-
-
-
 		$( '.notice' ).each( function(){
-			var $notice = jQuery( this ),
-				id = $notice.attr('id'),
-				count = parseInt( id.replace( 'bgthgr-notice-', '' ) ),
-				stopId = 'bgthgr-notice-' + ( count + 1 ),
-				prevId = 'bgthgr-notice-' + ( count - 1 ),
-				$grepContainer = $notice.closest( '.bgthgr-item-container' ).find( '.bgthgr-grep-container' );
+			var $notice = $( this ),
+				count = parseInt( $notice.attr('id').replace( 'bgthgr-notice-', '' ) ),
+				prevId = 'bgthgr-notice-' + ( count - 1 );
 
 			$notice.sticky({
 				topSpacing: 27,
 				zIndex: 3,
-				stopper: '#' + stopId,
 				className: 'bgthgr-sticky-notice'
 			});
 
@@ -109,5 +57,4 @@
 			});
 		});
 	}
-
 })( jQuery );
