@@ -11,7 +11,7 @@
  */
 
 /**
- * Grep
+ * Grep class.
  *
  * @package    Boldgrid_Theme_Grep
  * @subpackage Boldgrid_Theme_Grep/admin
@@ -28,8 +28,11 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 	public $template_directory;
 
 	/**
+	 * Get the theme's template directory.
 	 *
-	 * @param unknown $cmd
+	 * @since 1.0.0
+	 *
+	 * @return string
 	 */
 	public function get_template_directory() {
 		if ( empty( $this->template_directory ) ) {
@@ -39,6 +42,14 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 		return $this->template_directory;
 	}
 
+	/**
+	 * Execute a grep command and return the results.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param  string $cmd The grep command to run.
+	 * @return array       Example: https://pastebin.com/uJPBnKbz
+	 */
 	public function grep( $cmd ) {
 		$results = [];
 
@@ -69,7 +80,12 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 	}
 
 	/**
+	 * Grep and print.
 	 *
+	 * @since 1.0.0
+	 *
+	 * @param  string $cmd        The grep command to run.
+	 * @param  array  $highlights An array of words to highlight in the grep results.
 	 */
 	public function grep_and_print( $cmd, $highlights = [] ) {
 		$results = $this->grep( $cmd );
@@ -79,10 +95,10 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 			return;
 		}
 
-		echo '<div class="bgthgr-grep-container">
-			';
+		echo '<div class="bgthgr-grep-container">';
 
 		foreach ( $results as $file => $lines ) {
+			// Create URL to the file editor for this file.
 			$edit_file_url = admin_url(
 				'theme-editor.php?file=' .
 				urlencode( str_replace( $this->get_template_directory() . '/', '', $file ) ) .
@@ -96,6 +112,7 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 				$line = strlen( $line ) > $line_max ? substr( $line, 0, $line_max ) . ' [LINE TRUNCATED]' : $line;
 			}
 
+			// Highlight words in the results.
 			$lines = esc_html( implode( "\n\n", $lines ) );
 			foreach ( $highlights as $highlight ) {
 				$lines = str_replace( $highlight, '<span class="bgthgr-code-highlight">' . $highlight . '</span>', $lines );
@@ -112,7 +129,5 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 		}
 
 		echo '</div>';
-
-		// echo '<pre>$results = ' . print_r( $results,1) . '</pre>';
 	}
 }
