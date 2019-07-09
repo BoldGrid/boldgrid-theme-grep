@@ -5,7 +5,7 @@
  * Plugin configuration file.
  *
  * @link https://www.boldgrid.com
- * @since 1.0
+ * @since 1.0.0
  *
  * @package    Boldgrid_Theme_Grep
  * @subpackage Boldgrid_Backup/includes
@@ -16,7 +16,7 @@
 
 if ( ! defined( 'WPINC' ) ) die;
 
-$theme = wp_get_theme();
+// $theme = wp_get_theme();
 
 return [
 	'pages' => [
@@ -29,8 +29,8 @@ return [
 					'items' => [
 						[
 							'description'    => 'Child themes must include more than minor changes (such as font and colour changes) to the parent theme to be accepted. To make it easier on the reviewer, make sure you describe what modifications/features you did on top of the parent theme (in a ticket comment).',
-							'in-theme-check' => false,
-							'result'         => '<p>Is child theme: ' . ( is_child_theme() ? 'Yes' : 'No' ) . '</p>',
+							// 'in-theme-check' => false,
+							// 'result'         => '<p>Is child theme: ' . ( is_child_theme() ? 'Yes' : 'No' ) . '</p>',
 						],
 					],
 				],
@@ -39,8 +39,8 @@ return [
 					'items' => [
 						[
 							'description'    => 'If the theme has the tag ‘accessibility-ready’ then it needs to meet <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">these requirements</a>.',
-							'in-theme-check' => false,
-							'result'         => '<p>Has accessibility-ready tag: ' . ( in_array( 'accessibility-ready', $theme->get( 'Tags' ) ) ? 'Yes' : 'No' ) . '</p>',
+							// 'in-theme-check' => false,
+							// 'result'         => '<p>Has accessibility-ready tag: ' . ( in_array( 'accessibility-ready', $theme->get( 'Tags' ) ) ? 'Yes' : 'No' ) . '</p>',
 						],
 					],
 				],
@@ -50,7 +50,7 @@ return [
 					'items' => [
 						[
 							'description'    => 'No PHP or JS notices.',
-							'in-theme-check' => false,
+							// 'in-theme-check' => false,
 							'greps'          => [
 								[
 									'cmd'       => 'grep -RE "(admin_notices|notice-|is-dismissible)" <THEME>/*',
@@ -60,7 +60,7 @@ return [
 						],
 						[
 							'description'    => 'Validate and/or sanitize untrusted data before entering into the database. All untrusted data should be escaped before output. (See: <a href="https://codex.wordpress.org/Data_Validation">Data Validation</a>)',
-							'in-theme-check' => false,
+							// 'in-theme-check' => false,
 							'greps'          => [
 								[
 									'cmd'        => 'grep -REi --include \*.php "(wpdb|sql|insert)" <THEME>/*',
