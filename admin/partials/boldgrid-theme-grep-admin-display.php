@@ -39,7 +39,7 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 		// Page heading.
 		echo '<h2 class="page" id="bgthgr-page-' . $page_count . '">' . esc_html( $page['title'] ) . ' <a href="' . esc_url( $page['url'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></h2>';
 
-		foreach( $page['sections'] as $section ) {
+		foreach ( $page['sections'] as $section ) {
 			foreach ( $section['items'] as $item ) {
 				$grep_count = 1;
 
@@ -51,7 +51,15 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 
 				$markup_rule = '<p class="bgthgr-rule-container">
 					<strong class="bgthgr-pill">RULE:</strong>
-					<em>' . wp_kses( $item['description'], [ 'a' => [ 'href' => [], 'target' => [] ], 'br' => [] ] ) . '</em>
+					<em>' . wp_kses(
+					$item['description'], [
+						'a'  => [
+							'href'   => [],
+							'target' => [],
+						],
+						'br' => [],
+					]
+				) . '</em>
 				</p>';
 
 				// If we don't have any greps, show a warning. Otherwise, loop through each grep.
@@ -67,15 +75,14 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 					</div>';
 
 					$notice_count++;
-				}
-				else {
+				} else {
 					foreach ( $item['greps'] as $a_grep ) {
-						$cmd        = $a_grep[ 'cmd' ];
-						$highlights = $a_grep[ 'highlights' ];
+						$cmd        = $a_grep['cmd'];
+						$highlights = $a_grep['highlights'];
 
 						$markup_cmd = '<div class="bgthgr-cmd-container">
 							<p class="bgthgr-cmd-heading">
-								<strong>Shell command executed</strong> ( ' . $grep_count . ' of ' . count( $item['greps']) . ' ):
+								<strong>Shell command executed</strong> ( ' . $grep_count . ' of ' . count( $item['greps'] ) . ' ):
 							</p>
 							<div class="bgthgr-code">' . esc_html( $cmd ) . '</div>
 						</div>';
@@ -101,5 +108,6 @@ $grep = new Boldgrid_Theme_Grep_Admin_Grep();
 		} // End of 1 section.
 
 		$page_count++;
-	} // End of 1 page. ?>
+	} // End of 1 page.
+	?>
 </div>

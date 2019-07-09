@@ -14,10 +14,11 @@
  * @author     BoldGrid <support@boldgrid.com>
  */
 
-if ( ! defined( 'WPINC' ) ) die;
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
 // $theme = wp_get_theme();
-
 return [
 	'pages' => [
 		[
@@ -28,7 +29,7 @@ return [
 					'title' => 'Child themes',
 					'items' => [
 						[
-							'description'    => 'Child themes must include more than minor changes (such as font and colour changes) to the parent theme to be accepted. To make it easier on the reviewer, make sure you describe what modifications/features you did on top of the parent theme (in a ticket comment).',
+							'description' => 'Child themes must include more than minor changes (such as font and colour changes) to the parent theme to be accepted. To make it easier on the reviewer, make sure you describe what modifications/features you did on top of the parent theme (in a ticket comment).',
 							// 'in-theme-check' => false,
 							// 'result'         => '<p>Is child theme: ' . ( is_child_theme() ? 'Yes' : 'No' ) . '</p>',
 						],
@@ -38,7 +39,7 @@ return [
 					'title' => 'Accessibility',
 					'items' => [
 						[
-							'description'    => 'If the theme has the tag ‘accessibility-ready’ then it needs to meet <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">these requirements</a>.',
+							'description' => 'If the theme has the tag ‘accessibility-ready’ then it needs to meet <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">these requirements</a>.',
 							// 'in-theme-check' => false,
 							// 'result'         => '<p>Has accessibility-ready tag: ' . ( in_array( 'accessibility-ready', $theme->get( 'Tags' ) ) ? 'Yes' : 'No' ) . '</p>',
 						],
@@ -49,19 +50,19 @@ return [
 					'url'   => 'https://make.wordpress.org/themes/handbook/review/required/#code',
 					'items' => [
 						[
-							'description'    => 'No PHP or JS notices.',
+							'description' => 'No PHP or JS notices.',
 							// 'in-theme-check' => false,
-							'greps'          => [
+							'greps'       => [
 								[
-									'cmd'       => 'grep -RE "(admin_notices|notice-|is-dismissible)" <THEME>/*',
+									'cmd'        => 'grep -RE "(admin_notices|notice-|is-dismissible)" <THEME>/*',
 									'highlights' => array( 'admin_notices', 'notice-', 'is-dismissible' ),
 								],
 							],
 						],
 						[
-							'description'    => 'Validate and/or sanitize untrusted data before entering into the database. All untrusted data should be escaped before output. (See: <a href="https://codex.wordpress.org/Data_Validation">Data Validation</a>)',
+							'description' => 'Validate and/or sanitize untrusted data before entering into the database. All untrusted data should be escaped before output. (See: <a href="https://codex.wordpress.org/Data_Validation">Data Validation</a>)',
 							// 'in-theme-check' => false,
-							'greps'          => [
+							'greps'       => [
 								[
 									'cmd'        => 'grep -REi --include \*.php "(wpdb|sql|insert)" <THEME>/*',
 									'highlights' => [ 'wpdb', 'sql', 'insert' ],
@@ -84,23 +85,23 @@ return [
 							'description' => 'Provide a <a href="http://themereview.co/prefix-all-the-things/">unique prefix</a> for everything the Theme defines in the public namespace, including options, functions, global variables, constants, post meta, etc.&nbsp;Theme nav menu locations and sidebar IDs are exceptions.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE  "(add_option|update_option)" <THEME>/* | grep -Ev "(public function|private function|protected function|static function)"',
+									'cmd'        => 'grep -RE  "(add_option|update_option)" <THEME>/* | grep -Ev "(public function|private function|protected function|static function)"',
 									'highlights' => [ 'add_option', 'update_option' ],
 								],
 								[
-									'cmd' => 'grep -R --include \*.php "function " <THEME>/* | grep -Ev "(public function|private function|protected function|static function)"',
+									'cmd'        => 'grep -R --include \*.php "function " <THEME>/* | grep -Ev "(public function|private function|protected function|static function)"',
 									'highlights' => [ 'function ' ],
 								],
 								[
-									'cmd' => 'grep -RE --include \*.php "(global |GLOBALS)" <THEME>/*',
+									'cmd'        => 'grep -RE --include \*.php "(global |GLOBALS)" <THEME>/*',
 									'highlights' => [ 'global ', 'GLOBALS' ],
 								],
 								[
-									'cmd' => 'grep -R --include \*.php "define*(" <THEME>/*',
+									'cmd'        => 'grep -R --include \*.php "define*(" <THEME>/*',
 									'highlights' => [ 'define(', 'define (' ],
 								],
 								[
-									'cmd' => 'grep -RE "(get_post_meta|add_post_meta)" <THEME>/*',
+									'cmd'        => 'grep -RE "(get_post_meta|add_post_meta)" <THEME>/*',
 									'highlights' => [ 'get_post_meta', 'add_post_meta' ],
 								],
 							],
@@ -118,16 +119,16 @@ return [
 							'description' => 'Do not use features/APIs meant for WP Core use only e.g. <a href="https://developer.wordpress.org/reference/classes/wp_internal_pointers/">admin pointers</a> and <a href="https://codex.wordpress.org/Category:Private_Functions">private functions</a>.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(_wp_post_revision_fields|_transition_post_status|_get_plugin_data_markup_translate|_cleanup_header_comment|do_shortcode_tag|get_post_type_labels|preview_theme_ob_filter_callback|preview_theme_ob_filter|wp_get_widget_defaults|wp_get_sidebars_widgets|wp_unregister_GLOBALS|wp_set_sidebars_widgets|WP_Internal_Pointers)" <THEME>/*',
+									'cmd'        => 'grep -RE "(_wp_post_revision_fields|_transition_post_status|_get_plugin_data_markup_translate|_cleanup_header_comment|do_shortcode_tag|get_post_type_labels|preview_theme_ob_filter_callback|preview_theme_ob_filter|wp_get_widget_defaults|wp_get_sidebars_widgets|wp_unregister_GLOBALS|wp_set_sidebars_widgets|WP_Internal_Pointers)" <THEME>/*',
 									'highlights' => [ '_wp_post_revision_fields', '_transition_post_status', '_get_plugin_data_markup_translate', '_cleanup_header_comment', 'do_shortcode_tag', 'get_post_type_labels', 'preview_theme_ob_filter_callback', 'preview_theme_ob_filter', 'wp_get_widget_defaults', 'wp_get_sidebars_widgets', 'wp_unregister_GLOBALS', 'wp_set_sidebars_widgets', 'WP_Internal_Pointers' ],
-								]
+								],
 							],
 						],
 						[
 							'description' => 'No pay wall restricting any WordPress feature.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(premium|upgrade)" <THEME>/*',
+									'cmd'        => 'grep -RE "(premium|upgrade)" <THEME>/*',
 									'highlights' => [ 'premium', 'upgrade' ],
 								],
 							],
@@ -154,7 +155,7 @@ return [
 							'description' => 'Themes should not remove, hide, or otherwise block the admin bar from appearing.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(wpadminbar|wp-admin-bar)" <THEME>/*',
+									'cmd'        => 'grep -RE "(wpadminbar|wp-admin-bar)" <THEME>/*',
 									'highlights' => [ 'wpadminbar', 'wp-admin-bar' ],
 								],
 							],
@@ -163,7 +164,7 @@ return [
 							'description' => 'Core theme activation UX should not be modified. There should be no redirect on activation behaviour.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(wp_redirect|Location)" <THEME>/*',
+									'cmd'        => 'grep -RE "(wp_redirect|Location)" <THEME>/*',
 									'highlights' => [ 'wp_redirect', 'Location' ],
 								],
 							],
@@ -193,7 +194,7 @@ return [
 							'description' => 'Demo content may be used to show the user how the options work. Use <a href="https://make.wordpress.org/core/2016/11/30/starter-content-for-themes-in-4-7/">starter content</a>, existing content, or installation instructions instead of placeholder content. Installation instructions should only be visible to users with the edit_theme_options capability, not to visitors.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(starter-content|starter_content)" <THEME>/*',
+									'cmd'        => 'grep -RE "(starter-content|starter_content)" <THEME>/*',
 									'highlights' => [ 'starter-content', 'starter_conotent' ],
 								],
 							],
@@ -205,7 +206,7 @@ return [
 							'description' => 'Adding custom blocks for Gutenberg (the new text editor in WordPress) is not allowed. Use a companion plugin instead.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(gutenberg|wp-blocks|wp-element)" <THEME>/*',
+									'cmd'        => 'grep -RE "(gutenberg|wp-blocks|wp-element)" <THEME>/*',
 									'highlights' => [ 'gutenberg', 'wp-blocks', 'wp-element' ],
 								],
 							],
@@ -232,11 +233,11 @@ return [
 							'description' => 'All theme text strings are to be translatable.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE --include \*.php "(echo|print)" <THEME>/*',
+									'cmd'        => 'grep -RE --include \*.php "(echo|print)" <THEME>/*',
 									'highlights' => [ 'echo', 'print' ],
 								],
 								[
-									'cmd' => 'grep -RE --include \*.php "(__\(|_e\()" <THEME>/*',
+									'cmd'        => 'grep -RE --include \*.php "(__\(|_e\()" <THEME>/*',
 									'highlights' => [ '__', '_e' ],
 								],
 							],
@@ -266,7 +267,7 @@ return [
 							'description' => 'Declare licenses of any resources included such as fonts or images.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(license|copyright)" <THEME>/*',
+									'cmd'        => 'grep -RE "(license|copyright)" <THEME>/*',
 									'highlights' => [ 'license', 'copyright' ],
 								],
 							],
@@ -293,7 +294,7 @@ return [
 							'description' => 'Spell “WordPress” correctly in all public facing text: all one word, with both an uppercase W and P.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -Ri "wordpress" <THEME>/* | grep -v "WordPress"',
+									'cmd'        => 'grep -Ri "wordpress" <THEME>/* | grep -v "WordPress"',
 									'highlights' => [ 'wordpress' ],
 								],
 							],
@@ -311,7 +312,7 @@ return [
 							'description' => 'Save options in a single array.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(update_option|add_option)" <THEME>/*',
+									'cmd'        => 'grep -RE "(update_option|add_option)" <THEME>/*',
 									'highlights' => [ 'update_option', 'add_option' ],
 								],
 							],
@@ -326,7 +327,7 @@ return [
 							'description' => 'Use <em>edit_theme_options</em> capability for determining user permission to edit options, rather than rely on a role (e.g. “administrator”), or a different capability (e.g. “edit_themes”, “manage_options”).',
 							'greps'       => [
 								[
-									'cmd' => 'grep -Ri "user_can" <THEME>/*',
+									'cmd'        => 'grep -Ri "user_can" <THEME>/*',
 									'highlights' => [ 'user_can' ],
 								],
 							],
@@ -383,7 +384,7 @@ return [
 							'description' => 'Don’t phone home without informed user consent. Make any collection of user data “opt-in” only and have a theme option that is set to disabled by default.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -RE "(curl|wp_remote|fopen)" <THEME>/*',
+									'cmd'        => 'grep -RE "(curl|wp_remote|fopen)" <THEME>/*',
 									'highlights' => [ 'curl', 'wp_remote', 'fopen' ],
 								],
 							],
@@ -428,7 +429,7 @@ return [
 							'description' => 'No hard coding of script and style files.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -REi "(text/css|\<*link )" <THEME>/* | grep -Ev "(@link)"',
+									'cmd'        => 'grep -REi "(text/css|\<*link )" <THEME>/* | grep -Ev "(@link)"',
 									'highlights' => [ 'text/css', 'link' ],
 								],
 							],
@@ -437,7 +438,7 @@ return [
 							'description' => 'No minification of scripts or files unless you provide original files.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -R "(\.min)" <THEME>/*',
+									'cmd'        => 'grep -R "(\.min)" <THEME>/*',
 									'highlights' => [ '.min' ],
 								],
 							],
@@ -449,11 +450,11 @@ return [
 							'description' => 'Include all scripts and resources it uses rather than hot-linking. The exception to this is Google Fonts.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -R "*script*src" <THEME>/*',
+									'cmd'        => 'grep -R "*script*src" <THEME>/*',
 									'highlights' => [ 'script', 'src' ],
 								],
 								[
-									'cmd' => 'grep -R "*link*href" <THEME>/*',
+									'cmd'        => 'grep -R "*link*href" <THEME>/*',
 									'highlights' => [ 'link', 'href' ],
 								],
 							],
@@ -468,9 +469,9 @@ return [
 							'description' => '<em>If used in the theme</em>, standard template files are required to be called by their respective function: header.php (via <a href="https://codex.wordpress.org/Function_Reference/get_header">get_header()</a>), footer.php (via <a href="https://codex.wordpress.org/Function_Reference/get_footer">get_footer()</a>)., sidebar.php (via <a href="https://codex.wordpress.org/Function_Reference/get_sidebar">get_sidebar()</a>), searchform.php (via <a href="https://codex.wordpress.org/Function_Reference/get_search_form">get_search_form()</a>).',
 							'greps'       => [
 								[
-									'cmd' => 'grep -REi "grep -RE "(header\.php|footer\.php|sidebar\.php|searchform\.php)" <THEME>/*',
+									'cmd'        => 'grep -REi "grep -RE "(header\.php|footer\.php|sidebar\.php|searchform\.php)" <THEME>/*',
 									'highlights' => [ 'header.php', 'footer.php', 'sidebar.php', 'searchform.php' ],
-								]
+								],
 							],
 						],
 						[
@@ -501,7 +502,7 @@ return [
 							'description' => 'Themes may be backwards compatible, but only for 3 major WordPress versions (version 4.5 if 4.8 is latest).<br />- Themes do not need to wrap older WordPress functions in <a href="http://php.net/manual/en/function.function-exists.php"><code>function_exists</code></a>.<br />- Themes should not provide fallbacks for WordPress functions added more than 3 versions ago, since we want to encourage users to upgrade their WordPress installation. This is a fairly common problem when theme authors has used an older version of <a href="http://underscores.me/">underscores</a> as a base for their theme.',
 							'greps'       => [
 								[
-									'cmd' => 'grep -R "function_exists" <THEME>/*',
+									'cmd'        => 'grep -R "function_exists" <THEME>/*',
 									'highlights' => [ 'function_exists' ],
 								],
 							],

@@ -72,7 +72,7 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 			$empty_match   = empty( $file ) || empty( $match );
 			$comment_match = substr( $match, 0, 3 ) === '// ' || substr( $match, 0, 2 ) === '* ' || substr( $match, 0, 4 ) === '/** ' || substr( $match, 0, 3 ) === '/* ';
 			if ( ! $empty_match && ! $comment_match ) {
-					$results[$file][] = $match;
+					$results[ $file ][] = $match;
 			}
 		}
 
@@ -121,7 +121,7 @@ class Boldgrid_Theme_Grep_Admin_Grep {
 			echo '<div class="bgthgr-file-container">
 				<div class="bgthgr-heading">' .
 					'<span class="dashicons dashicons-arrow-down-alt2"></span> ' .
-					esc_html( str_replace( $this->get_template_directory(), '', $file) ) .
+					esc_html( str_replace( $this->get_template_directory(), '', $file ) ) .
 					' <a href="' . esc_url( $edit_file_url ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a>' .
 				'</div>
 				<div class="bgthgr-code">' . $lines . '</div>
